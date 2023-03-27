@@ -1,19 +1,39 @@
 {
   "name": "mreact-tweet",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "build": "pnpm build:swc && pnpm types",
-    "build:swc": "swc src -d dist --copy-files",
-    "dev": "pnpm build:swc -w",
-    "types": "tsc --emitDeclarationOnly",
-    "lint": "TIMING=1 eslint \"src/**/*.{ts,tsx,js,jsx}\" --fix",
-    "clean": "rm -rf dist && rm -rf .turbo"
+  "version": "2.0.0",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vercel-labs/react-tweet/issues"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "sideEffects": [
+    "./dist/tweet-container.js"
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "react-server": "./dist/index.js",
+      "default": "./dist/index.client.js"
+    },
+    "./api": "./dist/api/index.js",
+    "./theme.css": "./dist/theme.css"
+  },
+  "files": [
+    "dist/**/*.{js,d.ts,css}"
+  ],
+  "typesVersions": {
+    "*": {
+      "index": [
+        "dist/index.d.ts"
+      ],
+      "api": [
+        "dist/api/index.d.ts"
+      ],
+      "*": []
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "peerDependencies": {
     "react": ">= 18.0.0",
     "react-dom": ">= 18.0.0"
@@ -33,5 +53,13 @@
     "eslint": "^8.34.0",
     "eslint-config-next": "^13.2.3",
     "typescript": "^4.9.5"
+  },
+  "scripts": {
+    "build": "pnpm build:swc && pnpm types",
+    "build:swc": "swc src -d dist --copy-files",
+    "dev": "pnpm build:swc -w",
+    "types": "tsc --emitDeclarationOnly",
+    "lint": "TIMING=1 eslint \"src/**/*.{ts,tsx,js,jsx}\" --fix",
+    "clean": "rm -rf dist && rm -rf .turbo"
   }
 }
